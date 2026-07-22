@@ -1,1 +1,90 @@
-r
+name: PACDI Site Health Check
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # her gün 06:00 UTC (Berlin yazın 08:00)
+  workflow_dispatch: {}    # manuel de tetiklenebilir ("Run workflow" butonu)
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      has_warning: ${{ steps.scan.outputs.has_warning }}
+    steps:
+      - name: CNAME'lerden domainleri topla ve kontrol et
+        id: scan
+        env:
+          GH_ACCOUNT: easygovio
+          # Bu domainler otomatik taramaya DAHİL EDİLMEZ (ör. sürpriz/gizli projeler):
+          EXCLUDE_DOMAINS: "uniroute.world"
+        run: |
+          set -e
+          REPORT=report.txt
+          echo "PACDI Site Sağlık Raporu — $(date -u '+%Y-%m-%d %H:%M UTC')" > "$REPORT"
+          echo "" >> "$REPORT"
+
+          echo "## 🧭 PACDI Site Sağlık Raporu — $(date -u '+%Y-%m-%d %H:%M UTC')" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Domain | robots.txt | sitemap.xml | ads.txt | Google ping | Bing ping |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|---|---|---|---|---|" >> "$GITHUB_STEP_SUMMARY"
+
+          PAGE=1
+          while : ; do
+            REPOS_JSON=$(curl -s "https://api.github.com/users/${GH_ACCOUNT}/repos?per_page=100&page=${PAGE}")
+            COUNT=$(echo "$REPOS_JSON" | jq 'length')
+            if [ "$COUNT" -eq 0 ]; then break; fi
+
+            echo "$REPOS_JSON" | jq -r '.[] | "\(.name)|\(.default_branch)"' | while IFS='|' read -r REPO BRANCH; do
+              CNAME_URL="https://raw.githubusercontent.com/${GH_ACCOUNT}/${REPO}/${BRANCH}/CNAME"
+              DOMAIN=$(curl -s "$CNAME_URL" | tr -d '[:space:]')
+
+              if [ -z "$DOMAIN" ]; then continue; fi
+              case ",$EXCLUDE_DOMAINS," in
+                *",$DOMAIN,"*) continue ;;
+              esac
+
+              ROBOTS=$(curl -s -o /dev/null -w "%{http_code}" "https://${DOMAIN}/robots.txt" || echo "ERR")
+              SITEMAP=$(curl -s -o /dev/null -w "%{http_code}" "https://${DOMAIN}/sitemap.xml" || echo "ERR")
+              ADSTXT=$(curl -s -o /dev/null -w "%{http_code}" "https://${DOMAIN}/ads.txt" || echo "ERR")
+
+              GPING="—"
+              BPING="—"
+              if [ "$SITEMAP" = "200" ]; then
+                GPING=$(curl -s -o /dev/null -w "%{http_code}" "https://www.google.com/ping?sitemap=https://${DOMAIN}/sitemap.xml" || echo "ERR")
+                BPING=$(curl -s -o /dev/null -w "%{http_code}" "https://www.bing.com/ping?sitemap=https://${DOMAIN}/sitemap.xml" || echo "ERR")
+              fi
+
+              flag() { [ "$1" = "200" ] && echo "✅ $1" || echo "⚠️ $1"; }
+
+              LINE="| ${DOMAIN} (${REPO}) | $(flag $ROBOTS) | $(flag $SITEMAP) | $(flag $ADSTXT) | $(flag $GPING) | $(flag $BPING) |"
+              echo "$LINE" >> "$GITHUB_STEP_SUMMARY"
+              echo "$LINE" >> "$REPORT"
+            done
+
+            PAGE=$((PAGE+1))
+          done
+
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "_ads.txt eksikse AdSense onayı/geliri etkilenir. Bu rapor GitHub → Actions → bu workflow çalışmasının 'Summary' sekmesinde her gün görünür._" >> "$GITHUB_STEP_SUMMARY"
+
+          if grep -q "⚠️" "$REPORT"; then
+            echo "has_warning=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_warning=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Uyarı varsa mail gönder
+        if: steps.scan.outputs.has_warning == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtps.udag.de
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "⚠️ PACDI Site Sağlık Raporu — sorun tespit edildi"
+          to: mehmet@askmeai.io
+          from: mehmet@askmeai.io
+          body: |
+            En az bir domainde robots.txt / sitemap.xml / ads.txt eksik ya da Google/Bing ping başarısız oldu.
+
+            Ayrıntılar için GitHub → Actions → bu workflow çalışmasının "Summary" sekmesine bak.
