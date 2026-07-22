@@ -83,7 +83,7 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: "⚠️ PACDI Site Sağlık Raporu — sorun tespit edildi"
           to: mehmet@askmeai.io
-          from: mehmet@askmeai.io
+          from: mehmet@pacdi.de
           body: |
             En az bir domainde robots.txt / sitemap.xml / ads.txt eksik ya da Google/Bing ping başarısız oldu.
 
