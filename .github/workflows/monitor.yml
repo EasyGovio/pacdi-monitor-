@@ -75,16 +75,25 @@ jobs:
 
       - name: Uyarı varsa mail gönder
         if: steps.scan.outputs.has_warning == 'true'
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtps.udag.de
-          server_port: 465
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "⚠️ PACDI Site Sağlık Raporu — sorun tespit edildi"
-          to: mehmet@askmeai.io
-          from: mehmet@pacdi.de
-          body: |
-            En az bir domainde robots.txt / sitemap.xml / ads.txt eksik ya da Google/Bing ping başarısız oldu.
+        env:
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        run: |
+          SUBJECT_B64=$(echo -n "⚠️ PACDI Site Sağlık Raporu — sorun tespit edildi" | base64 -w0)
+          {
+            echo "From: mehmet@pacdi.de"
+            echo "To: mehmet@askmeai.io"
+            echo "Subject: =?UTF-8?B?${SUBJECT_B64}?="
+            echo "Content-Type: text/plain; charset=UTF-8"
+            echo ""
+            echo "En az bir domainde robots.txt / sitemap.xml / ads.txt eksik ya da Google/Bing ping başarısız oldu."
+            echo ""
+            echo "Ayrıntılar için GitHub -> Actions -> bu workflow çalışmasının \"Summary\" sekmesine bak."
+          } > mail.txt
 
-            Ayrıntılar için GitHub → Actions → bu workflow çalışmasının "Summary" sekmesine bak.
+          curl --ssl-reqd \
+            --url 'smtps://smtps.udag.de:465' \
+            --mail-from 'mehmet@pacdi.de' \
+            --mail-rcpt 'mehmet@askmeai.io' \
+            --user "${MAIL_USERNAME}:${MAIL_PASSWORD}" \
+            --upload-file mail.txt
