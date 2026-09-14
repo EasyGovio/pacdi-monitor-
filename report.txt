@@ -1,0 +1,26 @@
+PACDI Site Sağlık Raporu — 2026-09-14 13:56 UTC
+
+| beichtraum.de (beichtraum) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| 404:NotFound (Betreuer-Cockpit) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| cogniroute.de (Cogniroute) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| geduldstein.de (geduldstein) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| 404:NotFound (GlucoNavigator) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| kiezflow.de (kiezflow-landing) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| 404:NotFound (KompassPro_mini) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| navigopro.de (NavigoPro) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| onkelsorgen.de (onkelsorgen) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| 404:NotFound (pacdi-content-depot) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| pacdi.io (pacdi-digital) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| pacdi.eu (pacdi-eu) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| 404:NotFound (pacdi-monitor-) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| 404:NotFound (pacdi-standards) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| pacdi.de (PACDI-web) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| 404:NotFound (pacdi-ws-server) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| 404:NotFound (pacdi.de) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| pacdi.games (Pacdi.Games) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| 404:NotFound (PACDI_privacy) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| 404:NotFound (PusulaPro_mini) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| schulroute.de (SchulRoute) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| 404:NotFound (TeknoNavigator) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
+| wasstehtmirzu.com (wasstehtmirzu-com) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
+| wohnroute.de (wohnroute) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
