@@ -8,9 +8,14 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     outputs:
       has_warning: ${{ steps.scan.outputs.has_warning }}
     steps:
+      - name: Repoyu checkout et
+        uses: actions/checkout@v4
+
       - name: CNAME'lerden domainleri topla ve kontrol et
         id: scan
         env:
@@ -97,3 +102,11 @@ jobs:
             --mail-rcpt 'mehmet@askmeai.io' \
             --user "${MAIL_USERNAME}:${MAIL_PASSWORD}" \
             --upload-file mail.txt
+
+      - name: Raporu repoya commit'le (repo'yu aktif tutup 60 gün kuralına takılmamak için)
+        run: |
+          git config user.name "pacdi-monitor-bot"
+          git config user.email "actions@github.com"
+          git add report.txt
+          git diff --staged --quiet && echo "Değişiklik yok, commit atlanıyor" || git commit -m "Günlük sağlık raporu — $(date -u '+%Y-%m-%d')"
+          git push
