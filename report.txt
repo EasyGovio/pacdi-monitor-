@@ -1,4 +1,4 @@
-PACDI Site Sağlık Raporu — 2026-09-20 10:28 UTC
+PACDI Site Sağlık Raporu — 2026-09-21 11:46 UTC
 
 | beichtraum.de (beichtraum) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
 | 404:NotFound (Betreuer-Cockpit) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
