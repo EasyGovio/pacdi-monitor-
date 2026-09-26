@@ -1,4 +1,4 @@
-PACDI Site Sağlık Raporu — 2026-09-25 10:58 UTC
+PACDI Site Sağlık Raporu — 2026-09-26 10:40 UTC
 
 | beichtraum.de (beichtraum) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
 | 404:NotFound (Betreuer-Cockpit) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
@@ -20,7 +20,7 @@ PACDI Site Sağlık Raporu — 2026-09-25 10:58 UTC
 | pacdi.games (Pacdi.Games) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
 | 404:NotFound (PACDI_privacy) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
 | 404:NotFound (PusulaPro_mini) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
-| schulroute.de (SchulRoute) | ✅ 200 | ⚠️ 503 | ✅ 200 | ⚠️ — | ⚠️ — |
+| schulroute.de (SchulRoute) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
 | 404:NotFound (TeknoNavigator) | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ 000ERR | ⚠️ — | ⚠️ — |
 | wasstehtmirzu.com (wasstehtmirzu-com) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
 | wohnroute.de (wohnroute) | ✅ 200 | ✅ 200 | ✅ 200 | ⚠️ 404 | ⚠️ 410 |
